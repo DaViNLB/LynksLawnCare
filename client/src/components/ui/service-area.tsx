@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight, Info } from "lucide-react";
+import GoogleMap from "./google-map";
 
 export default function ServiceArea() {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   const locations = [
-    { id: "felton", name: "Felton, DE", description: "Full service area", position: { top: "25%", left: "33%" } },
-    { id: "harrington", name: "Harrington, DE", description: "Full service area", position: { top: "33%", right: "25%" } },
-    { id: "farmington", name: "Farmington, DE", description: "Full service area", position: { bottom: "33%", left: "50%" } },
-    { id: "houston", name: "Houston, DE", description: "Full service area", position: { top: "50%", right: "33%" } },
-    { id: "brownsville", name: "Brownsville, DE", description: "Full service area", position: { bottom: "25%", left: "25%" } }
+    { id: "felton", name: "Felton, DE", description: "Full service area", lat: 38.9548, lng: -75.5771 },
+    { id: "harrington", name: "Harrington, DE", description: "Full service area", lat: 38.9242, lng: -75.5768 },
+    { id: "farmington", name: "Farmington, DE", description: "Full service area", lat: 38.8748, lng: -75.6057 },
+    { id: "houston", name: "Houston, DE", description: "Full service area", lat: 38.9073, lng: -75.5099 },
+    { id: "brownsville", name: "Brownsville, DE", description: "Full service area", lat: 38.9251, lng: -75.6568 }
   ];
 
   return (
@@ -26,34 +27,13 @@ export default function ServiceArea() {
         <Card className="max-w-5xl mx-auto shadow-xl overflow-hidden">
           <CardContent className="p-0">
             <div className="grid md:grid-cols-2">
-              {/* Interactive Map */}
-              <div className="relative h-96 md:h-full bg-neutral-200">
-                <img
-                  src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                  alt="Delaware service area map"
-                  className="w-full h-full object-cover"
+              {/* Interactive Google Map */}
+              <div className="h-96 md:h-full">
+                <GoogleMap 
+                  locations={locations}
+                  selectedLocation={selectedLocation}
+                  onLocationSelect={setSelectedLocation}
                 />
-
-                {/* Service Location Markers */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-full h-full max-w-md">
-                    {locations.map((location) => (
-                      <button
-                        key={location.id}
-                        className="location-pin absolute transform -translate-x-1/2 -translate-y-1/2"
-                        style={location.position}
-                        onClick={() => setSelectedLocation(location.id)}
-                      >
-                        <div className={`w-8 h-8 rounded-full border-4 border-white shadow-lg pulse ${
-                          selectedLocation === location.id ? 'bg-secondary' : 'bg-primary'
-                        }`}></div>
-                        <div className="text-xs font-semibold text-neutral-800 mt-1">
-                          {location.name.split(',')[0]}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
               </div>
 
               {/* Location Information */}
