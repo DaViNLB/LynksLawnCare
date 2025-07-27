@@ -26,7 +26,6 @@ export default function Navigation() {
     { href: "home", label: "Home" },
     { href: "services", label: "Services" },
     { href: "pricing", label: "Pricing" },
-    { href: "testimonials", label: "Testimonials" },
     { href: "service-area", label: "Service Area" },
     { href: "about", label: "About" },
     { href: "contact", label: "Contact" },
@@ -39,7 +38,7 @@ export default function Navigation() {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Leaf className="text-2xl text-primary" />
+            <Leaf className="text-2xl text-green-700" />
             <span className="text-2xl font-bold text-neutral-800">Lynks Lawn Care</span>
           </div>
 

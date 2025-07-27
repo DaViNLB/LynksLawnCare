@@ -2,7 +2,6 @@ import Navigation from "@/components/ui/navigation";
 import Hero from "@/components/ui/hero";
 import Services from "@/components/ui/services";
 import PricingCalculator from "@/components/ui/pricing-calculator";
-import Testimonials from "@/components/ui/testimonials";
 import ServiceArea from "@/components/ui/service-area";
 import Booking from "@/components/ui/booking";
 import About from "@/components/ui/about";
@@ -16,7 +15,6 @@ export default function Home() {
       <Hero />
       <Services />
       <PricingCalculator />
-      <Testimonials />
       <ServiceArea />
       <Booking />
       <About />

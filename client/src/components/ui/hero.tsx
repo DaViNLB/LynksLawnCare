@@ -14,8 +14,8 @@ export default function Hero() {
       <div className="absolute inset-0 hero-bg"></div>
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
-          alt="Professional lawn mowing service"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
+          alt="Professional lawn with perfect mowing lines"
           className="w-full h-full object-cover opacity-30"
         />
       </div>
@@ -40,22 +40,14 @@ export default function Hero() {
             <Button
               variant="outline"
               onClick={() => scrollToSection("services")}
-              className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg font-semibold"
+              className="border-2 border-white text-white bg-white/20 hover:bg-white hover:text-primary px-8 py-4 text-lg font-semibold"
             >
               <Leaf className="w-5 h-5 mr-2" />
               View Services
             </Button>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-accent">500+</div>
-              <div className="text-neutral-200">Happy Customers</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-accent">5+</div>
-              <div className="text-neutral-200">Years Experience</div>
-            </div>
+          <div className="mt-12 flex justify-center max-w-3xl mx-auto">
             <div className="text-center">
               <div className="text-3xl font-bold text-accent">100%</div>
               <div className="text-neutral-200">Satisfaction Guarantee</div>
