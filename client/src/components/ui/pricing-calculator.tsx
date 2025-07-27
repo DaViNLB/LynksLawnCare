@@ -13,13 +13,11 @@ export default function PricingCalculator() {
   const serviceDetails = {
     mowing: {
       base: 30,
-      perAcre: 25,
+      perAcre: 70,
       services: [
-        "Professional mowing with quality equipment",
-        "Precision edging & string trimming", 
-        "Debris removal & cleanup",
-        "Basic weed removal",
-        "Flexible scheduling options"
+        "Even, full-coverage grass cutting",
+        "Clean, precise edging along driveways, sidewalks, and flowerbeds", 
+        "Full blow-off of clippings from hard surfaces for a neat finish"
       ]
     }
   };
@@ -73,15 +71,15 @@ export default function PricingCalculator() {
                         value={acres}
                         onValueChange={setAcres}
                         min={0.1}
-                        max={5}
+                        max={2.5}
                         step={0.1}
                         className="w-full"
                       />
                     </div>
                     <div className="flex justify-between text-sm text-neutral-500 mt-2">
                       <span>0.1</span>
+                      <span>1.25</span>
                       <span>2.5</span>
-                      <span>5.0</span>
                     </div>
                     <div className="mt-3 text-center">
                       <span className="text-2xl font-bold text-primary">{acres[0]}</span>

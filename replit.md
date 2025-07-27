@@ -25,6 +25,14 @@ Recent Changes:
 - Added subscription options: weekly, bi-weekly, monthly, quarterly, yearly (January 27, 2025)
 - Removed "Read Reviews" button from About section (January 27, 2025)
 - Updated pricing calculator for residential properties under 0.1 acre base pricing (January 27, 2025)
+- Changed hero background to healthy green grass image (January 27, 2025)
+- Updated navigation styling: dark green initial state, white on hover; Book Now button inverted (January 27, 2025)
+- Updated hero message to emphasize service options and Delaware coverage (January 27, 2025)
+- Modified service section to focus on Kent County Delaware specifically (January 27, 2025)
+- Changed service image to show push mower/equipment and updated description (January 27, 2025)
+- Simplified service features to focus on cutting, edging, and cleanup (January 27, 2025)
+- Added subscription dropdown to booking form with all service options (January 27, 2025)
+- Updated pricing calculator: $30 for 0.1 acre, $100 for 1 acre, $250 max for 2.5 acres (January 27, 2025)
 
 ## System Architecture
 

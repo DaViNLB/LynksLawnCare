@@ -14,8 +14,8 @@ export default function Hero() {
       <div className="absolute inset-0 hero-bg"></div>
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
-          alt="Professional lawn with perfect mowing lines"
+          src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
+          alt="Healthy green grass lawn"
           className="w-full h-full object-cover opacity-30"
         />
       </div>
@@ -27,7 +27,7 @@ export default function Hero() {
             <span className="text-accent">Masterpiece</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-neutral-100 max-w-2xl mx-auto">
-            Professional lawn care services in Delaware. From routine maintenance to seasonal cleanups, we make your outdoor space beautiful.
+            Reliable lawn mowing, edging, and leaf blowing services for homes and small businesses in Delaware. Choose from one-time, weekly, bi-weekly, monthly, quarterly or yearly visiting options — quality work and fair pricing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button

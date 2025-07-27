@@ -6,15 +6,13 @@ export default function Services() {
     {
       id: "mowing",
       title: "Lawn Mowing & Maintenance",
-      description: "Professional lawn mowing and maintenance service for residential properties. Includes precision edging, trimming, debris cleanup, and basic weed removal to keep your lawn healthy and beautiful.",
+      description: "Professional lawn mowing and maintenance service for residential properties using a dependable push mower, string trimmer (weed eater), and leaf blower equipment — perfect for small to mid-sized residential lawns. Each visit includes:",
       icon: <Scissors className="text-xl" />,
       color: "primary",
       features: [
-        "Professional mowing with quality equipment",
-        "Precision edging & string trimming",
-        "Debris removal & cleanup",
-        "Basic weed removal",
-        "Flexible scheduling options"
+        "Even, full-coverage grass cutting",
+        "Clean, precise edging along driveways, sidewalks, and flowerbeds",
+        "Full blow-off of clippings from hard surfaces for a neat finish"
       ],
       startingPrice: "$30/visit",
       subscriptionOptions: [
@@ -24,7 +22,7 @@ export default function Services() {
         { type: "Quarterly", price: "$50/visit", savings: "Seasonal" },
         { type: "Yearly", price: "Custom Quote", savings: "Best Rate" }
       ],
-      image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
     }
   ];
 
@@ -34,7 +32,7 @@ export default function Services() {
         <div className="text-center mb-16 fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-800 mb-6">Our Service</h2>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-            Professional lawn mowing and maintenance service for residential properties in Delaware with flexible subscription options.
+            Professional lawn mowing and maintenance service for residential properties in Kent County Delaware with flexible subscription options.
           </p>
         </div>
 
@@ -78,20 +76,7 @@ export default function Services() {
                   <div className="text-sm text-neutral-600">For residential lawns under 0.1 acre</div>
                 </div>
 
-                {service.subscriptionOptions && (
-                  <div className="mt-6">
-                    <h4 className="text-lg font-semibold text-neutral-800 mb-4">Subscription Options</h4>
-                    <div className="grid md:grid-cols-3 gap-3">
-                      {service.subscriptionOptions.map((option, optIdx) => (
-                        <div key={optIdx} className="bg-white p-4 rounded-lg border border-neutral-200 text-center">
-                          <div className="text-sm font-semibold text-neutral-800">{option.type}</div>
-                          <div className="text-lg font-bold text-primary">{option.price}</div>
-                          <div className="text-xs text-neutral-500">{option.savings}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+
               </CardContent>
             </Card>
           ))}

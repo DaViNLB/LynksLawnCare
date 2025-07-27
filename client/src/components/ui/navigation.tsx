@@ -48,14 +48,14 @@ export default function Navigation() {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-neutral-700 hover:text-primary transition-colors"
+                className="text-green-700 hover:text-white transition-colors font-semibold"
               >
                 {link.label}
               </button>
             ))}
             <Button
               onClick={() => scrollToSection("booking")}
-              className="bg-primary text-white hover:bg-secondary"
+              className="bg-white text-green-700 hover:bg-green-700 hover:text-white border-2 border-green-700"
             >
               Book Now
             </Button>
@@ -80,14 +80,14 @@ export default function Navigation() {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-neutral-700 hover:text-primary transition-colors text-left"
+                  className="text-green-700 hover:text-white transition-colors text-left font-semibold"
                 >
                   {link.label}
                 </button>
               ))}
               <Button
                 onClick={() => scrollToSection("booking")}
-                className="bg-primary text-white hover:bg-secondary w-full"
+                className="bg-white text-green-700 hover:bg-green-700 hover:text-white border-2 border-green-700 w-full"
               >
                 Book Now
               </Button>

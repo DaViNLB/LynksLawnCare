@@ -23,6 +23,7 @@ export default function Booking() {
     address: "",
     serviceType: "",
     propertySize: "",
+    subscription: "",
     notes: ""
   });
 
@@ -50,14 +51,13 @@ export default function Booking() {
 
   const calculatePrice = (serviceType: string, acres: number) => {
     const pricing = {
-      mowing: { base: 45, perAcre: 25 },
-      cleanup: { base: 125, perAcre: 75 }
+      mowing: { base: 30, perAcre: 70 }
     };
 
     const service = pricing[serviceType as keyof typeof pricing];
     if (!service) return 0;
 
-    const additional = acres > 0.5 ? (acres - 0.5) * service.perAcre : 0;
+    const additional = acres > 0.1 ? (acres - 0.1) * service.perAcre : 0;
     return service.base + additional;
   };
 
@@ -166,8 +166,23 @@ export default function Booking() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="mowing">Lawn Mowing & Maintenance</SelectItem>
-                        <SelectItem value="cleanup">Seasonal Cleanup</SelectItem>
-                        <SelectItem value="both">Both Services</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="subscription">Subscription</Label>
+                    <Select value={formData.subscription} onValueChange={(value) => handleInputChange("subscription", value)}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue placeholder="Select subscription option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="one-time">One-time</SelectItem>
+                        <SelectItem value="weekly">Weekly</SelectItem>
+                        <SelectItem value="bi-weekly">Bi-weekly</SelectItem>
+                        <SelectItem value="monthly">Monthly</SelectItem>
+                        <SelectItem value="quarterly">Quarterly</SelectItem>
+                        <SelectItem value="yearly">Yearly</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -179,7 +194,7 @@ export default function Booking() {
                       type="number"
                       step="0.1"
                       min="0.1"
-                      max="10"
+                      max="2.5"
                       required
                       value={formData.propertySize}
                       onChange={(e) => handleInputChange("propertySize", e.target.value)}
