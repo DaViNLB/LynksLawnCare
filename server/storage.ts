@@ -53,6 +53,8 @@ export class MemStorage implements IStorage {
       createdAt: new Date(),
       paymentId: null,
       paid: false,
+      notes: insertBooking.notes || null,
+      status: insertBooking.status || "pending",
     };
     this.bookings.set(id, booking);
     return booking;

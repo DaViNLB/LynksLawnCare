@@ -11,10 +11,10 @@ import { ArrowLeft, CreditCard } from "lucide-react";
 import { Link } from "wouter";
 import { Booking } from "@shared/schema";
 
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+// Optional Stripe integration - can be configured later
+const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
+  ? loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+  : null;
 
 const CheckoutForm = ({ booking }: { booking: Booking }) => {
   const stripe = useStripe();
@@ -79,15 +79,26 @@ export default function Checkout() {
   });
 
   useEffect(() => {
-    if (booking) {
+    if (booking && stripePromise) {
       apiRequest("POST", "/api/create-payment-intent", { 
         amount: parseFloat(booking.estimatedPrice),
         bookingId: booking.id 
       })
         .then((res) => res.json())
         .then((data) => {
-          setClientSecret(data.clientSecret);
+          if (data.error === "STRIPE_NOT_CONFIGURED") {
+            // Stripe not configured on backend
+            setClientSecret("NOT_CONFIGURED");
+          } else {
+            setClientSecret(data.clientSecret);
+          }
+        })
+        .catch(() => {
+          setClientSecret("ERROR");
         });
+    } else if (booking && !stripePromise) {
+      // Stripe not configured on frontend
+      setClientSecret("NOT_CONFIGURED");
     }
   }, [booking]);
 
@@ -122,6 +133,98 @@ export default function Checkout() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
+
+  if (clientSecret === "NOT_CONFIGURED" || clientSecret === "ERROR") {
+    return (
+      <div className="min-h-screen bg-neutral-50 py-12">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="mb-8">
+            <Link href="/">
+              <Button variant="ghost" className="mb-4">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+              </Button>
+            </Link>
+            <h1 className="text-4xl font-bold text-neutral-800">Booking Confirmed</h1>
+            <p className="text-xl text-neutral-600 mt-2">Your service request has been received</p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Booking Summary */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Booking Summary</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-neutral-600">Service:</span>
+                  <span className="font-semibold">
+                    {booking.serviceType === 'mowing' ? 'Lawn Mowing & Maintenance' : 'Seasonal Cleanup'}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-neutral-600">Property Size:</span>
+                  <span className="font-semibold">{booking.propertySize} acres</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-neutral-600">Customer:</span>
+                  <span className="font-semibold">{booking.firstName} {booking.lastName}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-neutral-600">Email:</span>
+                  <span className="font-semibold">{booking.email}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-neutral-600">Phone:</span>
+                  <span className="font-semibold">{booking.phone}</span>
+                </div>
+                <div className="border-t pt-4">
+                  <div className="flex justify-between text-lg font-bold">
+                    <span>Estimated Total:</span>
+                    <span className="text-primary">${booking.estimatedPrice}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Payment Information */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Payment Information</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-blue-900 mb-2">Booking Received!</h3>
+                  <p className="text-blue-800 text-sm mb-3">
+                    Your lawn care service request has been successfully submitted. We'll contact you within 24 hours to schedule your service.
+                  </p>
+                  <p className="text-blue-800 text-sm">
+                    <strong>Payment:</strong> You'll be able to pay securely after service completion. We accept all major credit cards.
+                  </p>
+                </div>
+                
+                <div className="bg-neutral-50 p-4 rounded-lg text-sm text-neutral-600">
+                  <p className="mb-2"><strong>What's Next?</strong></p>
+                  <ul className="space-y-1 text-sm">
+                    <li>• We'll call or text you within 24 hours</li>
+                    <li>• Schedule a convenient service time</li>
+                    <li>• Complete your lawn care service</li>
+                    <li>• Payment processed after completion</li>
+                  </ul>
+                </div>
+
+                <Link href="/">
+                  <Button className="w-full bg-primary hover:bg-secondary text-white">
+                    Return to Home
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     );
   }

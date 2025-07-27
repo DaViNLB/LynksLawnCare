@@ -5,13 +5,12 @@ import { storage } from "./storage";
 import { insertBookingSchema, insertContactSchema } from "@shared/schema";
 import { z } from "zod";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
-}
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-06-30.basil",
-});
+// Optional Stripe integration - can be configured later
+const stripe = process.env.STRIPE_SECRET_KEY 
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: "2025-06-30.basil",
+    })
+  : null;
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Create booking
@@ -41,6 +40,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Create payment intent for booking
   app.post("/api/create-payment-intent", async (req, res) => {
     try {
+      if (!stripe) {
+        return res.status(503).json({ 
+          message: "Payment processing is not configured. Please contact support to complete your booking.",
+          error: "STRIPE_NOT_CONFIGURED"
+        });
+      }
+
       const { amount, bookingId } = req.body;
       
       if (!amount || amount <= 0) {
