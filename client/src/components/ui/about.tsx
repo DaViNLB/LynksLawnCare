@@ -77,14 +77,6 @@ export default function About() {
                   <Phone className="w-4 h-4 mr-2" />
                   Contact Us
                 </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => scrollToSection("testimonials")}
-                  className="border-2 border-primary text-primary hover:bg-primary hover:text-white"
-                >
-                  <Star className="w-4 h-4 mr-2" />
-                  Read Reviews
-                </Button>
               </div>
             </div>
 

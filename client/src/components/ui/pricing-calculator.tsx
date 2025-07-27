@@ -6,29 +6,20 @@ import { Slider } from "@/components/ui/slider";
 import { CalendarCheck, Phone, Shield, Check } from "lucide-react";
 
 export default function PricingCalculator() {
-  const [serviceType, setServiceType] = useState("mowing");
-  const [acres, setAcres] = useState([0.5]);
-  const [pricing, setPricing] = useState({ basePrice: 45, totalPrice: 45 });
+  const [serviceType] = useState("mowing");
+  const [acres, setAcres] = useState([0.1]);
+  const [pricing, setPricing] = useState({ basePrice: 30, totalPrice: 30 });
 
   const serviceDetails = {
     mowing: {
-      base: 45,
+      base: 30,
       perAcre: 25,
       services: [
-        "Weekly or bi-weekly mowing",
-        "Precision edging & trimming", 
+        "Professional mowing with quality equipment",
+        "Precision edging & string trimming", 
         "Debris removal & cleanup",
-        "Basic weed removal"
-      ]
-    },
-    cleanup: {
-      base: 125,
-      perAcre: 75,
-      services: [
-        "Complete leaf removal",
-        "Branch & debris cleanup",
-        "Garden bed preparation",
-        "Property-wide cleanup"
+        "Basic weed removal",
+        "Flexible scheduling options"
       ]
     }
   };
@@ -36,7 +27,7 @@ export default function PricingCalculator() {
   useEffect(() => {
     const service = serviceDetails[serviceType as keyof typeof serviceDetails];
     const acreValue = acres[0];
-    const additional = acreValue > 0.5 ? (acreValue - 0.5) * service.perAcre : 0;
+    const additional = acreValue > 0.1 ? (acreValue - 0.1) * service.perAcre : 0;
     const total = service.base + additional;
 
     setPricing({
@@ -70,17 +61,9 @@ export default function PricingCalculator() {
                 <h3 className="text-2xl font-bold text-neutral-800 mb-6">Calculate Your Price</h3>
 
                 <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">Service Type</label>
-                    <Select value={serviceType} onValueChange={setServiceType}>
-                      <SelectTrigger className="w-full p-4 border-2 border-neutral-200">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="mowing">Lawn Mowing & Maintenance</SelectItem>
-                        <SelectItem value="cleanup">Seasonal Cleanup</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="bg-primary/10 p-4 rounded-lg">
+                    <h4 className="font-semibold text-primary mb-2">Service: Lawn Mowing & Maintenance</h4>
+                    <p className="text-sm text-neutral-600">Professional residential lawn care service</p>
                   </div>
 
                   <div>

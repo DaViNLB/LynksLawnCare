@@ -80,7 +80,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-neutral-800">Phone</h3>
-                      <p className="text-neutral-600">(302) 555-LAWN</p>
+                      <p className="text-neutral-600">(302) 469-0503</p>
                     </div>
                   </div>
                 </CardContent>
@@ -94,7 +94,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-neutral-800">Email</h3>
-                      <p className="text-neutral-600">info@lynkslawncare.com</p>
+                      <p className="text-neutral-600">Davinlynksservices@gmail.com</p>
                     </div>
                   </div>
                 </CardContent>

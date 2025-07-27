@@ -19,6 +19,12 @@ Recent Changes:
 - Updated hero section: darker green leaf icon, lawn background with mowing lines
 - Made "View Services" button text visible, removed customer stats and testimonials
 - Integrated PostgreSQL database with Drizzle ORM (January 27, 2025)
+- Integrated Google Maps JavaScript API with interactive service area map (January 27, 2025)
+- Updated contact information: phone (302) 469-0503, email Davinlynksservices@gmail.com (January 27, 2025)
+- Simplified services to single "Lawn Mowing & Maintenance" service at $30/visit (January 27, 2025)
+- Added subscription options: weekly, bi-weekly, monthly, quarterly, yearly (January 27, 2025)
+- Removed "Read Reviews" button from About section (January 27, 2025)
+- Updated pricing calculator for residential properties under 0.1 acre base pricing (January 27, 2025)
 
 ## System Architecture
 
@@ -51,8 +57,7 @@ The application uses three main entities:
 - **Contacts**: Contact form submissions and inquiries
 
 ### Core Services
-- **Lawn Mowing & Maintenance**: Regular mowing, edging, trimming, and basic lawn care
-- **Seasonal Cleanup**: Comprehensive seasonal maintenance including leaf removal and debris cleanup
+- **Lawn Mowing & Maintenance**: Single professional service offering with subscription options (weekly, bi-weekly, monthly, quarterly, yearly) starting at $30/visit for residential properties under 0.1 acre
 
 ### Payment System
 - Stripe integration for secure payment processing

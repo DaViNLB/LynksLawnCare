@@ -9,10 +9,10 @@ export default function Footer() {
   };
 
   const serviceLinks = [
-    { href: "services", label: "Lawn Mowing" },
-    { href: "services", label: "Seasonal Cleanup" },
+    { href: "services", label: "Lawn Mowing & Maintenance" },
     { href: "pricing", label: "Free Estimates" },
-    { href: "contact", label: "Emergency Service" }
+    { href: "contact", label: "Weekly Service" },
+    { href: "contact", label: "Monthly Service" }
   ];
 
   const serviceAreas = [
@@ -24,8 +24,8 @@ export default function Footer() {
   ];
 
   const contactInfo = [
-    { icon: <Phone className="w-4 h-4" />, text: "(302) 555-LAWN" },
-    { icon: <Mail className="w-4 h-4" />, text: "info@lynkslawncare.com" },
+    { icon: <Phone className="w-4 h-4" />, text: "(302) 469-0503" },
+    { icon: <Mail className="w-4 h-4" />, text: "Davinlynksservices@gmail.com" },
     { icon: <Clock className="w-4 h-4" />, text: "Mon-Fri: 7AM-6PM" }
   ];
 

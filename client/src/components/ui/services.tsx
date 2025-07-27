@@ -6,31 +6,24 @@ export default function Services() {
     {
       id: "mowing",
       title: "Lawn Mowing & Maintenance",
-      description: "Regular mowing, edging, trimming, and basic lawn care to keep your grass healthy and beautiful. Includes weed removal, debris cleanup, and professional mowing patterns.",
+      description: "Professional lawn mowing and maintenance service for residential properties. Includes precision edging, trimming, debris cleanup, and basic weed removal to keep your lawn healthy and beautiful.",
       icon: <Scissors className="text-xl" />,
       color: "primary",
       features: [
-        "Weekly or bi-weekly mowing",
-        "Precision edging & trimming",
+        "Professional mowing with quality equipment",
+        "Precision edging & string trimming",
         "Debris removal & cleanup",
-        "Basic weed removal"
+        "Basic weed removal",
+        "Flexible scheduling options"
       ],
-      startingPrice: "$45/visit",
-      image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
-    },
-    {
-      id: "cleanup",
-      title: "Seasonal Cleanup",
-      description: "Comprehensive seasonal maintenance including leaf removal, branch cleanup, garden bed preparation, and property-wide debris removal to prepare your lawn for the changing seasons.",
-      icon: <Shovel className="text-xl" />,
-      color: "secondary",
-      features: [
-        "Complete leaf removal",
-        "Branch & debris cleanup",
-        "Garden bed preparation",
-        "Property-wide cleanup"
+      startingPrice: "$30/visit",
+      subscriptionOptions: [
+        { type: "Weekly", price: "$30/visit", savings: "Most Popular" },
+        { type: "Bi-weekly", price: "$35/visit", savings: "Great Value" },
+        { type: "Monthly", price: "$40/visit", savings: "Budget Friendly" },
+        { type: "Quarterly", price: "$50/visit", savings: "Seasonal" },
+        { type: "Yearly", price: "Custom Quote", savings: "Best Rate" }
       ],
-      startingPrice: "$125/cleanup",
       image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
     }
   ];
@@ -39,17 +32,15 @@ export default function Services() {
     <section id="services" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-800 mb-6">Our Premium Services</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-800 mb-6">Our Service</h2>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-            We specialize in two core services designed to keep your lawn healthy, beautiful, and perfectly maintained year-round.
+            Professional lawn mowing and maintenance service for residential properties in Delaware with flexible subscription options.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {services.map((service, index) => (
-            <Card key={service.id} className={`service-card bg-neutral-50 shadow-lg hover:shadow-xl transition-all ${
-              index === 0 ? "slide-in-left" : "slide-in-right"
-            }`}>
+            <Card key={service.id} className="service-card bg-neutral-50 shadow-lg hover:shadow-xl transition-all slide-in-left">
               <CardContent className="p-8">
                 <img
                   src={service.image}
@@ -58,7 +49,7 @@ export default function Services() {
                 />
 
                 <div className="flex items-center mb-4">
-                  <div className={`${service.color === 'primary' ? 'bg-primary' : 'bg-secondary'} text-white p-3 rounded-full mr-4`}>
+                  <div className="bg-primary text-white p-3 rounded-full mr-4">
                     {service.icon}
                   </div>
                   <h3 className="text-2xl font-bold text-neutral-800">{service.title}</h3>
@@ -71,21 +62,36 @@ export default function Services() {
                 <div className="space-y-3 mb-6">
                   {service.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center text-neutral-700">
-                      <Check className={`${service.color === 'primary' ? 'text-primary' : 'text-secondary'} mr-3 w-4 h-4`} />
+                      <Check className="text-primary mr-3 w-4 h-4" />
                       <span>{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className={`${service.color === 'primary' ? 'bg-primary/10' : 'bg-secondary/10'} p-4 rounded-xl`}>
-                  <div className={`text-sm ${service.color === 'primary' ? 'text-primary' : 'text-secondary'} font-semibold mb-1`}>
+                <div className="bg-primary/10 p-4 rounded-xl mb-6">
+                  <div className="text-sm text-primary font-semibold mb-1">
                     Starting at
                   </div>
-                  <div className={`text-2xl font-bold ${service.color === 'primary' ? 'text-primary' : 'text-secondary'}`}>
+                  <div className="text-2xl font-bold text-primary">
                     {service.startingPrice}
                   </div>
-                  <div className="text-sm text-neutral-600">Based on lawn size</div>
+                  <div className="text-sm text-neutral-600">For residential lawns under 0.1 acre</div>
                 </div>
+
+                {service.subscriptionOptions && (
+                  <div className="mt-6">
+                    <h4 className="text-lg font-semibold text-neutral-800 mb-4">Subscription Options</h4>
+                    <div className="grid md:grid-cols-3 gap-3">
+                      {service.subscriptionOptions.map((option, optIdx) => (
+                        <div key={optIdx} className="bg-white p-4 rounded-lg border border-neutral-200 text-center">
+                          <div className="text-sm font-semibold text-neutral-800">{option.type}</div>
+                          <div className="text-lg font-bold text-primary">{option.price}</div>
+                          <div className="text-xs text-neutral-500">{option.savings}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
