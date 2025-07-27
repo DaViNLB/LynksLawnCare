@@ -17,8 +17,8 @@ interface GoogleMapProps {
 
 export default function GoogleMap({ locations, selectedLocation, onLocationSelect }: GoogleMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
+  const [map, setMap] = useState<any>(null);
+  const [markers, setMarkers] = useState<any[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
 
@@ -41,7 +41,7 @@ export default function GoogleMap({ locations, selectedLocation, onLocationSelec
         if (!mapRef.current) return;
 
         // Center the map on Delaware
-        const mapInstance = new google.maps.Map(mapRef.current, {
+        const mapInstance = new (window as any).google.maps.Map(mapRef.current, {
           center: { lat: 38.9108, lng: -75.5277 }, // Delaware center
           zoom: 10,
           styles: [
@@ -62,15 +62,15 @@ export default function GoogleMap({ locations, selectedLocation, onLocationSelec
         setIsLoaded(true);
 
         // Add markers for each service location
-        const newMarkers: google.maps.Marker[] = [];
+        const newMarkers: any[] = [];
         
         locations.forEach((location) => {
-          const marker = new google.maps.Marker({
+          const marker = new (window as any).google.maps.Marker({
             position: { lat: location.lat, lng: location.lng },
             map: mapInstance,
             title: location.name,
             icon: {
-              path: google.maps.SymbolPath.CIRCLE,
+              path: (window as any).google.maps.SymbolPath.CIRCLE,
               scale: 12,
               fillColor: selectedLocation === location.id ? '#16a34a' : '#22c55e',
               fillOpacity: 1,
@@ -108,7 +108,7 @@ export default function GoogleMap({ locations, selectedLocation, onLocationSelec
       const location = locations[index];
       if (marker && location) {
         marker.setIcon({
-          path: google.maps.SymbolPath.CIRCLE,
+          path: (window as any).google.maps.SymbolPath.CIRCLE,
           scale: selectedLocation === location.id ? 15 : 12,
           fillColor: selectedLocation === location.id ? '#16a34a' : '#22c55e',
           fillOpacity: 1,
