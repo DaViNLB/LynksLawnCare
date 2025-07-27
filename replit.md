@@ -15,6 +15,10 @@ Recent Changes:
 - Updated domain references to lynkslawncare.com throughout the application
 - Updated meta tags and SEO information for the new brand
 - Fixed TypeScript errors in booking and checkout components
+- Made Stripe integration optional for future setup (January 27, 2025)
+- Updated hero section: darker green leaf icon, lawn background with mowing lines
+- Made "View Services" button text visible, removed customer stats and testimonials
+- Integrated PostgreSQL database with Drizzle ORM (January 27, 2025)
 
 ## System Architecture
 
@@ -30,7 +34,7 @@ Recent Changes:
 - **Database**: PostgreSQL with Drizzle ORM
 - **Session Management**: Express sessions with PostgreSQL store
 - **Payment Processing**: Stripe integration for payment intents
-- **Data Storage**: Memory-based storage implementation with interface for database integration
+- **Data Storage**: PostgreSQL database with Drizzle ORM integration for persistent data storage
 
 ### Data Storage Strategy
 - **ORM**: Drizzle ORM configured for PostgreSQL
