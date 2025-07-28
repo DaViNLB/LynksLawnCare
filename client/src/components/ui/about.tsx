@@ -21,12 +21,6 @@ export default function About() {
       title: "Reliable Service",
       description: "On-time, every time guarantee",
       color: "accent"
-    },
-    {
-      icon: <Leaf className="w-6 h-6" />,
-      title: "Eco-Friendly",
-      description: "Sustainable lawn care practices",
-      color: "primary"
     }
   ];
 

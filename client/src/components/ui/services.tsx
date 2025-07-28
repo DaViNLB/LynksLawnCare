@@ -22,7 +22,7 @@ export default function Services() {
         { type: "Quarterly", price: "$50/visit", savings: "Seasonal" },
         { type: "Yearly", price: "Custom Quote", savings: "Best Rate" }
       ],
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
+      image: "@assets/Lawn Mower Image_1753658678505.jpg"
     }
   ];
 

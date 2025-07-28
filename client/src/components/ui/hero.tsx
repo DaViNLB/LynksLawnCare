@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="absolute inset-0 hero-bg"></div>
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
+          src="@assets/Facebook Cover Grass_1753658670246.webp"
           alt="Healthy green grass lawn"
           className="w-full h-full object-cover opacity-30"
         />

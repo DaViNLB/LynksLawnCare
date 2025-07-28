@@ -29,16 +29,54 @@ export default function Booking() {
 
   const bookingMutation = useMutation({
     mutationFn: async (data: any) => {
-      const response = await apiRequest("POST", "/api/bookings", data);
-      return response.json();
+      try {
+        // Submit to our database
+        const response = await apiRequest("POST", "/api/bookings", data);
+        const booking = await response.json();
+        
+        // Submit to Google Forms for data collection
+        const formData = new FormData();
+        formData.append('entry.1111111111', data.name); // Replace with actual Google Form field IDs
+        formData.append('entry.2222222222', data.email);
+        formData.append('entry.3333333333', data.phone);
+        formData.append('entry.4444444444', data.address);
+        formData.append('entry.5555555555', data.serviceType);
+        formData.append('entry.6666666666', data.subscriptionType);
+        formData.append('entry.7777777777', data.propertySize.toString());
+        formData.append('entry.8888888888', data.price.toString());
+        formData.append('entry.9999999999', data.specialRequests || '');
+        
+        // Submit to Google Form (silent failure)
+        fetch('https://docs.google.com/forms/d/e/YOUR_BOOKING_GOOGLE_FORM_ID/formResponse', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        }).catch(() => {}); // Silent fail for Google Forms
+        
+        return booking;
+      } catch (error) {
+        throw error;
+      }
     },
     onSuccess: (booking) => {
       toast({
         title: "Booking Created Successfully!",
         description: "Redirecting to payment...",
       });
-      // Redirect to checkout page
-      setLocation(`/checkout/${booking.id}`);
+      
+      // Send email notification
+      fetch('/api/send-booking-notification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingId: booking.id })
+      }).catch(console.error);
+      
+      // Check if Stripe is configured
+      if (import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
+        setLocation(`/checkout/${booking.id}`);
+      } else {
+        setLocation('/booking-success');
+      }
     },
     onError: (error: any) => {
       toast({

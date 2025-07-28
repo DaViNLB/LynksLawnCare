@@ -56,7 +56,7 @@ export class MemStorage implements IStorage {
       createdAt: new Date(),
       paymentId: null,
       paid: false,
-      notes: insertBooking.notes || null,
+      specialRequests: insertBooking.specialRequests || null,
       status: insertBooking.status || "pending",
     };
     this.bookings.set(id, booking);
@@ -119,7 +119,7 @@ export class DatabaseStorage implements IStorage {
       .insert(bookings)
       .values({
         ...insertBooking,
-        notes: insertBooking.notes || null,
+        specialRequests: insertBooking.specialRequests || null,
         status: insertBooking.status || "pending",
       })
       .returning();
@@ -154,4 +154,4 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();

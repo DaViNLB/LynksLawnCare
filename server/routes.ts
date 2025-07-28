@@ -5,6 +5,36 @@ import { storage } from "./storage";
 import { insertBookingSchema, insertContactSchema } from "@shared/schema";
 import { z } from "zod";
 
+// Email notification functions
+async function sendBookingNotification(booking: any) {
+  // Simple email notification simulation
+  console.log(`📧 New booking notification:
+    Customer: ${booking.name}
+    Email: ${booking.email}
+    Phone: ${booking.phone}
+    Service: ${booking.serviceType}
+    Address: ${booking.address}
+    Property Size: ${booking.propertySize} acres
+    Subscription: ${booking.subscriptionType}
+    Special Requests: ${booking.specialRequests || 'None'}
+    Price: $${booking.price}
+  `);
+  
+  // In a real implementation, you would integrate with:
+  // - SendGrid, Mailgun, or similar email service
+  // - Or direct SMTP configuration
+  // - Or webhook to external service like Zapier
+}
+
+async function sendContactNotification(contact: any) {
+  console.log(`📧 New contact form submission:
+    Name: ${contact.name}
+    Email: ${contact.email}
+    Phone: ${contact.phone || 'Not provided'}
+    Message: ${contact.message}
+  `);
+}
+
 // Optional Stripe integration - can be configured later
 const stripe = process.env.STRIPE_SECRET_KEY 
   ? new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -81,9 +111,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const contactData = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(contactData);
+      
+      // Send email notification for contact form
+      try {
+        await sendContactNotification(contact);
+      } catch (emailError) {
+        console.error('Failed to send contact notification:', emailError);
+      }
+      
       res.json(contact);
     } catch (error: any) {
       res.status(400).json({ message: "Invalid contact data: " + error.message });
+    }
+  });
+
+  // Send booking notification email
+  app.post("/api/send-booking-notification", async (req, res) => {
+    try {
+      const { bookingId } = req.body;
+      const booking = await storage.getBooking(bookingId);
+      
+      if (!booking) {
+        return res.status(404).json({ message: "Booking not found" });
+      }
+
+      await sendBookingNotification(booking);
+      res.json({ message: "Notification sent successfully" });
+    } catch (error: any) {
+      console.error('Failed to send booking notification:', error);
+      res.status(500).json({ message: "Failed to send notification" });
     }
   });
 

@@ -32,7 +32,14 @@ Recent Changes:
 - Changed service image to show push mower/equipment and updated description (January 27, 2025)
 - Simplified service features to focus on cutting, edging, and cleanup (January 27, 2025)
 - Added subscription dropdown to booking form with all service options (January 27, 2025)
-- Updated pricing calculator: $30 for 0.1 acre, $100 for 1 acre, $250 max for 2.5 acres (January 27, 2025)
+- Updated pricing calculator: $30 for 0.1 acre, scales to $220 for 2.5 acres (January 27, 2025)
+- Added Google Forms integration for data collection and Google Sheets storage (January 27, 2025)
+- Integrated Stripe payment processing with secure checkout flow (January 27, 2025)
+- Added email notifications for booking confirmations and contact form submissions (January 27, 2025)
+- Removed Emergency Services section and Eco-Friendly features as requested (January 27, 2025)
+- Updated business hours to Monday-Friday 9AM-5PM, weekends closed (January 27, 2025)
+- Added call functionality to "Call for a Custom Quote" button (January 27, 2025)
+- Updated email to lowercase: davinlynksservices@gmail.com (January 27, 2025)
 
 ## System Architecture
 

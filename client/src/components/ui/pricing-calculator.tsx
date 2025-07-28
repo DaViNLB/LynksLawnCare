@@ -13,7 +13,7 @@ export default function PricingCalculator() {
   const serviceDetails = {
     mowing: {
       base: 30,
-      perAcre: 70,
+      perAcre: 79.17,
       services: [
         "Even, full-coverage grass cutting",
         "Clean, precise edging along driveways, sidewalks, and flowerbeds", 
@@ -134,9 +134,10 @@ export default function PricingCalculator() {
                   <Button
                     variant="outline"
                     className="w-full border-2 border-white text-white hover:bg-white hover:text-primary"
+                    onClick={() => window.location.href = 'tel:+13024690503'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
-                    Call for Custom Quote
+                    Call for a Custom Quote
                   </Button>
                 </div>
 

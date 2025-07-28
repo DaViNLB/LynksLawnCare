@@ -25,8 +25,8 @@ export default function Footer() {
 
   const contactInfo = [
     { icon: <Phone className="w-4 h-4" />, text: "(302) 469-0503" },
-    { icon: <Mail className="w-4 h-4" />, text: "Davinlynksservices@gmail.com" },
-    { icon: <Clock className="w-4 h-4" />, text: "Mon-Fri: 7AM-6PM" }
+    { icon: <Mail className="w-4 h-4" />, text: "davinlynksservices@gmail.com" },
+    { icon: <Clock className="w-4 h-4" />, text: "Mon-Fri: 9AM-5PM, Weekends: Closed" }
   ];
 
   return (

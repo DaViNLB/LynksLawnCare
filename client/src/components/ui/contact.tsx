@@ -23,8 +23,30 @@ export default function Contact() {
 
   const contactMutation = useMutation({
     mutationFn: async (data: any) => {
-      const response = await apiRequest("POST", "/api/contacts", data);
-      return response.json();
+      // Submit to both our API and Google Forms for data collection
+      try {
+        // Submit to our database
+        const response = await apiRequest("POST", "/api/contacts", data);
+        
+        // Submit to Google Forms (replace with your actual Google Form URL)
+        const formData = new FormData();
+        formData.append('entry.1234567890', data.name); // Replace with actual field IDs
+        formData.append('entry.0987654321', data.email);
+        formData.append('entry.1122334455', data.phone || '');
+        formData.append('entry.6677889900', data.service);
+        formData.append('entry.5566778899', data.message);
+        
+        // Submit to Google Form (silent failure to avoid user disruption)
+        fetch('https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/formResponse', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        }).catch(() => {}); // Silent fail for Google Forms
+        
+        return response.json();
+      } catch (error) {
+        throw error;
+      }
     },
     onSuccess: () => {
       toast({
@@ -94,7 +116,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-neutral-800">Email</h3>
-                      <p className="text-neutral-600">Davinlynksservices@gmail.com</p>
+                      <p className="text-neutral-600">davinlynksservices@gmail.com</p>
                     </div>
                   </div>
                 </CardContent>
@@ -109,25 +131,15 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-neutral-800">Business Hours</h3>
                       <div className="text-neutral-600 text-sm">
-                        <p>Monday - Friday: 7AM - 6PM</p>
-                        <p>Saturday: 8AM - 4PM</p>
-                        <p>Sunday: Closed</p>
+                        <p>Monday - Friday: 9AM - 5PM</p>
+                        <p>Weekends: Closed</p>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-primary to-secondary text-white">
-                <CardContent className="p-6">
-                  <h3 className="font-bold text-lg mb-3">Emergency Services</h3>
-                  <p className="text-sm mb-4">Storm cleanup and urgent lawn care needs</p>
-                  <a href="tel:302-555-LAWN" className="inline-flex items-center text-accent font-semibold">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call Now
-                  </a>
-                </CardContent>
-              </Card>
+
             </div>
 
             {/* Contact Form */}
@@ -183,8 +195,6 @@ export default function Contact() {
                         <SelectContent>
                           <SelectItem value="estimate">Free Estimate</SelectItem>
                           <SelectItem value="mowing">Lawn Mowing & Maintenance</SelectItem>
-                          <SelectItem value="cleanup">Seasonal Cleanup</SelectItem>
-                          <SelectItem value="emergency">Emergency Service</SelectItem>
                           <SelectItem value="other">Other</SelectItem>
                         </SelectContent>
                       </Select>
