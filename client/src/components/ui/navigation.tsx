@@ -48,7 +48,7 @@ export default function Navigation() {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-white hover:text-yellow-400 transition-colors font-semibold"
+                className="text-yellow-400 hover:text-black transition-colors font-semibold"
               >
                 {link.label}
               </button>
@@ -80,7 +80,7 @@ export default function Navigation() {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-white hover:text-yellow-400 transition-colors text-left font-semibold"
+                  className="text-yellow-400 hover:text-black transition-colors text-left font-semibold"
                 >
                   {link.label}
                 </button>
