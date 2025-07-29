@@ -41,9 +41,7 @@ export default function About() {
               <p className="text-xl text-neutral-600 mb-6 leading-relaxed">
                 We're a family-owned lawn care business serving Delaware communities with passion and professionalism. Founded in 2018, we've built our reputation on quality work, reliable service, and satisfied customers.
               </p>
-              <p className="text-neutral-600 mb-8 leading-relaxed">
-                Our team of experienced professionals uses the latest equipment and proven techniques to keep your lawn healthy and beautiful year-round. We take pride in transforming outdoor spaces and exceeding customer expectations with every service.
-              </p>
+              <p className="text-neutral-600 mb-8 leading-relaxed">We take pride in transforming outdoor spaces and exceeding customer expectations with every service.</p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 {features.map((feature, index) => (
