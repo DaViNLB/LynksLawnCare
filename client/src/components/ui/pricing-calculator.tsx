@@ -133,7 +133,7 @@ export default function PricingCalculator() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="w-full border-2 border-white text-white hover:bg-white hover:text-primary"
+                    className="w-full bg-transparent border-2 border-white text-white hover:bg-white hover:text-green-700"
                     onClick={() => window.location.href = 'tel:+13024690503'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
