@@ -27,7 +27,7 @@ export default function Hero() {
             Transform Your Lawn Into a{" "}
             <span className="text-[#FFD700]">Masterpiece</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-neutral-100 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-[#000000]">
             Reliable lawn mowing, edging, and leaf blowing services for homes and small businesses in Delaware. Choose from one-time, weekly, bi-weekly, monthly, quarterly or yearly visiting options — quality work and fair pricing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
