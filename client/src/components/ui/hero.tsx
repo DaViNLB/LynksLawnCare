@@ -23,7 +23,7 @@ export default function Hero() {
       </div>
       <div className="relative z-10 container mx-auto px-6 text-center text-white">
         <div className="max-w-4xl mx-auto fade-in-up">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-[#000000]">
+          <h1 className="text-5xl md:text-7xl leading-tight text-[#000000] font-extrabold mt-[12px] mb-[12px] ml-[0px] mr-[0px] pl-[0px] pr-[0px] pt-[0px] pb-[0px]">
             Transform Your Lawn Into a{" "}
             <span className="text-[#FFD700]">Masterpiece</span>
           </h1>
