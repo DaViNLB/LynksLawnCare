@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { CalendarCheck, Leaf } from "lucide-react";
 
+import Facebook_Cover_Grass from "@assets/Facebook Cover Grass.webp";
+
 export default function Hero() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -14,12 +16,11 @@ export default function Hero() {
       <div className="absolute inset-0 hero-bg"></div>
       <div className="absolute inset-0">
         <img
-          src="@assets/Facebook Cover Grass_1753786749430.webp"
+          src={Facebook_Cover_Grass}
           alt="Healthy green grass lawn"
           className="w-full h-full object-cover opacity-30"
         />
       </div>
-
       <div className="relative z-10 container mx-auto px-6 text-center text-white">
         <div className="max-w-4xl mx-auto fade-in-up">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
