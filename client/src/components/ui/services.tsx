@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, Scissors, Shovel } from "lucide-react";
 
+import Lawn_Mower_Image from "@assets/Lawn Mower Image.jpg";
+
 export default function Services() {
   const services = [
     {
@@ -41,7 +43,7 @@ export default function Services() {
             <Card key={service.id} className="service-card bg-neutral-50 shadow-lg hover:shadow-xl transition-all slide-in-left">
               <CardContent className="p-8">
                 <img
-                  src={service.image}
+                  src={Lawn_Mower_Image}
                   alt={service.title}
                   className="w-full h-48 object-cover rounded-xl mb-6"
                 />
