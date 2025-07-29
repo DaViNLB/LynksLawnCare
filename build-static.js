@@ -15,9 +15,11 @@ try {
   }
   fs.mkdirSync('dist/public', { recursive: true });
 
-  // Build with Vite
+  // Build with Vite using static config
   console.log('📦 Building static website...');
-  execSync('vite build --config vite.config.static.ts', { stdio: 'inherit' });
+  process.chdir('./client');
+  execSync('npx vite build --config ../vite.config.static.ts', { stdio: 'inherit' });
+  process.chdir('..');
 
   // Create GitHub Pages configuration files
   console.log('⚙️ Creating GitHub Pages configuration...');
