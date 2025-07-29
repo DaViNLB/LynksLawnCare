@@ -48,7 +48,7 @@ export default function Navigation() {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-yellow-600 hover:text-black transition-colors font-semibold"
+                className="hover:text-black transition-colors text-[#050505] font-semibold"
               >
                 {link.label}
               </button>
