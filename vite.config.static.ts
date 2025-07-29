@@ -9,6 +9,11 @@ export default defineConfig({
   build: {
     outDir: '../dist/public',
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
   resolve: {
     alias: {
@@ -18,6 +23,6 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env': {},
+    'process.env.NODE_ENV': '"production"',
   },
 });
