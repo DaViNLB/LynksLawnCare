@@ -45,6 +45,7 @@ Recent Changes:
 - Added scheduled exports: daily at 2 AM and weekly on Mondays at 9 AM (January 29, 2025)
 - Created admin endpoints for viewing stored booking and contact data (January 29, 2025)
 - Updated "Call for Custom Quote" button styling: transparent with white text/border, green text on hover (January 29, 2025)
+- Implemented free email notification system using FormSubmit.co for booking and contact form submissions (January 29, 2025)
 
 ## System Architecture
 

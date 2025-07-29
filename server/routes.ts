@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import Stripe from "stripe";
 import { storage } from "./storage";
 import { insertBookingSchema, insertContactSchema } from "@shared/schema";
+import { createBookingNotificationEmail, createContactNotificationEmail, sendNotificationEmail } from "./email-notifications";
 import { z } from "zod";
 import { exportAllDataToSheets, exportBookingsToSheets, exportContactsToSheets } from "./google-sheets";
 import { triggerImmediateExport } from "./scheduler";
@@ -53,7 +54,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Send email notification for booking
       try {
-        await sendBookingNotification(booking);
+        const emailData = createBookingNotificationEmail(booking);
+        await sendNotificationEmail(emailData);
       } catch (emailError) {
         console.error('Failed to send booking notification:', emailError);
       }
@@ -125,7 +127,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Send email notification for contact form
       try {
-        await sendContactNotification(contact);
+        const emailData = createContactNotificationEmail(contact);
+        await sendNotificationEmail(emailData);
       } catch (emailError) {
         console.error('Failed to send contact notification:', emailError);
       }

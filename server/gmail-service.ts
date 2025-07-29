@@ -77,7 +77,7 @@ export async function sendBookingNotification(booking: Booking): Promise<boolean
               </tr>
               <tr style="border-bottom: 1px solid #e5e7eb;">
                 <td style="padding: 8px 0; font-weight: bold; color: #6b7280;">Subscription:</td>
-                <td style="padding: 8px 0; color: #374151;">${booking.subscription}</td>
+                <td style="padding: 8px 0; color: #374151;">${booking.subscriptionType}</td>
               </tr>
               <tr style="border-bottom: 1px solid #e5e7eb;">
                 <td style="padding: 8px 0; font-weight: bold; color: #6b7280;">Property Size:</td>
@@ -138,7 +138,7 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
     const gmail = await initializeGmailService();
     const businessEmail = 'davinlynksservices@gmail.com';
 
-    const subject = `New Contact Message: ${contact.name} - ${contact.serviceInterest}`;
+    const subject = `New Contact Message: ${contact.name} - ${contact.service || 'General Inquiry'}`;
     
     const htmlBody = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
@@ -164,7 +164,7 @@ export async function sendContactNotification(contact: Contact): Promise<boolean
               </tr>
               <tr style="border-bottom: 1px solid #e5e7eb;">
                 <td style="padding: 8px 0; font-weight: bold; color: #6b7280;">Service Interest:</td>
-                <td style="padding: 8px 0; color: #374151;">${contact.serviceInterest}</td>
+                <td style="padding: 8px 0; color: #374151;">${contact.service || 'General Inquiry'}</td>
               </tr>
               ${contact.address ? `
                 <tr style="border-bottom: 1px solid #e5e7eb;">
