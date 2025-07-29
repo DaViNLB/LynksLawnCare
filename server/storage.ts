@@ -12,8 +12,10 @@ export interface IStorage {
   getBooking(id: string): Promise<Booking | undefined>;
   createBooking(booking: InsertBooking): Promise<Booking>;
   updateBookingPayment(id: string, paymentId: string): Promise<Booking>;
+  getAllBookings(): Promise<Booking[]>;
   
   createContact(contact: InsertContact): Promise<Contact>;
+  getAllContacts(): Promise<Contact[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -87,6 +89,14 @@ export class MemStorage implements IStorage {
     this.contacts.set(id, contact);
     return contact;
   }
+
+  async getAllBookings(): Promise<Booking[]> {
+    return Array.from(this.bookings.values());
+  }
+
+  async getAllContacts(): Promise<Contact[]> {
+    return Array.from(this.contacts.values());
+  }
 }
 
 // Database Storage Implementation
@@ -151,6 +161,14 @@ export class DatabaseStorage implements IStorage {
       })
       .returning();
     return contact;
+  }
+
+  async getAllBookings(): Promise<Booking[]> {
+    return await db.select().from(bookings);
+  }
+
+  async getAllContacts(): Promise<Contact[]> {
+    return await db.select().from(contacts);
   }
 }
 

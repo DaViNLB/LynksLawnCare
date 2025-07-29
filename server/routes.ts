@@ -4,6 +4,8 @@ import Stripe from "stripe";
 import { storage } from "./storage";
 import { insertBookingSchema, insertContactSchema } from "@shared/schema";
 import { z } from "zod";
+import { exportAllDataToSheets, exportBookingsToSheets, exportContactsToSheets } from "./google-sheets";
+import { triggerImmediateExport } from "./scheduler";
 
 // Email notification functions
 async function sendBookingNotification(booking: any) {
@@ -149,6 +151,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error('Failed to send booking notification:', error);
       res.status(500).json({ message: "Failed to send notification" });
+    }
+  });
+
+  // Google Sheets export endpoints
+  app.post("/api/export-to-sheets", async (req, res) => {
+    try {
+      await exportAllDataToSheets();
+      res.json({ message: "Data exported to Google Sheets successfully" });
+    } catch (error: any) {
+      console.error('Failed to export to Google Sheets:', error);
+      res.status(500).json({ message: "Failed to export data: " + error.message });
+    }
+  });
+
+  app.post("/api/export-bookings-to-sheets", async (req, res) => {
+    try {
+      await exportBookingsToSheets();
+      res.json({ message: "Bookings exported to Google Sheets successfully" });
+    } catch (error: any) {
+      console.error('Failed to export bookings to Google Sheets:', error);
+      res.status(500).json({ message: "Failed to export bookings: " + error.message });
+    }
+  });
+
+  app.post("/api/export-contacts-to-sheets", async (req, res) => {
+    try {
+      await exportContactsToSheets();
+      res.json({ message: "Contacts exported to Google Sheets successfully" });
+    } catch (error: any) {
+      console.error('Failed to export contacts to Google Sheets:', error);
+      res.status(500).json({ message: "Failed to export contacts: " + error.message });
+    }
+  });
+
+  // Get stored data endpoints for admin viewing
+  app.get("/api/admin/bookings", async (req, res) => {
+    try {
+      const bookings = await storage.getAllBookings();
+      res.json(bookings);
+    } catch (error: any) {
+      res.status(500).json({ message: "Error fetching bookings: " + error.message });
+    }
+  });
+
+  app.get("/api/admin/contacts", async (req, res) => {
+    try {
+      const contacts = await storage.getAllContacts();
+      res.json(contacts);
+    } catch (error: any) {
+      res.status(500).json({ message: "Error fetching contacts: " + error.message });
     }
   });
 

@@ -26,7 +26,7 @@ Recent Changes:
 - Removed "Read Reviews" button from About section (January 27, 2025)
 - Updated pricing calculator for residential properties under 0.1 acre base pricing (January 27, 2025)
 - Changed hero background to healthy green grass image (January 27, 2025)
-- Updated navigation styling: dark green initial state, white on hover; Book Now button inverted (January 27, 2025)
+- Updated navigation styling: dark golden text with gold hover effect (January 29, 2025)
 - Updated hero message to emphasize service options and Delaware coverage (January 27, 2025)
 - Modified service section to focus on Kent County Delaware specifically (January 27, 2025)
 - Changed service image to show push mower/equipment and updated description (January 27, 2025)
@@ -40,6 +40,11 @@ Recent Changes:
 - Updated business hours to Monday-Friday 9AM-5PM, weekends closed (January 27, 2025)
 - Added call functionality to "Call for a Custom Quote" button (January 27, 2025)
 - Updated email to lowercase: davinlynksservices@gmail.com (January 27, 2025)
+- Switched from in-memory to PostgreSQL database storage for all form data (January 29, 2025)
+- Implemented Google Sheets API integration for automatic data export (January 29, 2025)
+- Added scheduled exports: daily at 2 AM and weekly on Mondays at 9 AM (January 29, 2025)
+- Created admin endpoints for viewing stored booking and contact data (January 29, 2025)
+- Updated "Call for Custom Quote" button styling: transparent with white text/border, green text on hover (January 29, 2025)
 
 ## System Architecture
 
