@@ -48,8 +48,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const bookingData = insertBookingSchema.parse(req.body);
       const booking = await storage.createBooking(bookingData);
+      
+      // Send email notification for booking
+      try {
+        await sendBookingNotification(booking);
+      } catch (emailError) {
+        console.error('Failed to send booking notification:', emailError);
+      }
+      
       res.json(booking);
     } catch (error: any) {
+      console.error('Booking creation error:', error);
       res.status(400).json({ message: "Invalid booking data: " + error.message });
     }
   });

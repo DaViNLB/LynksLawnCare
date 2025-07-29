@@ -105,12 +105,21 @@ export default function Booking() {
     const acres = parseFloat(formData.propertySize);
     const estimatedPrice = calculatePrice(formData.serviceType, acres);
 
-    bookingMutation.mutate({
-      ...formData,
+    // Map form data to database schema
+    const bookingData = {
+      name: `${formData.firstName} ${formData.lastName}`.trim(),
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      serviceType: formData.serviceType,
+      subscriptionType: formData.subscription,
       propertySize: acres.toString(),
-      estimatedPrice: estimatedPrice.toString(),
+      specialRequests: formData.notes,
+      price: estimatedPrice.toString(),
       status: "pending"
-    });
+    };
+
+    bookingMutation.mutate(bookingData);
   };
 
   const handleInputChange = (field: string, value: string) => {
