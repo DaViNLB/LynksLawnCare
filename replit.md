@@ -46,6 +46,7 @@ Recent Changes:
 - Created admin endpoints for viewing stored booking and contact data (January 29, 2025)
 - Updated "Call for Custom Quote" button styling: transparent with white text/border, green text on hover (January 29, 2025)
 - Implemented free email notification system using FormSubmit.co for booking and contact form submissions (January 29, 2025)
+- Added comprehensive form validation with red asterisks and error messages for both booking and contact forms (January 29, 2025)
 
 ## System Architecture
 

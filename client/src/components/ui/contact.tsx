@@ -20,6 +20,7 @@ export default function Contact() {
     address: "",
     message: ""
   });
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const contactMutation = useMutation({
     mutationFn: async (data: any) => {
@@ -71,13 +72,49 @@ export default function Contact() {
     },
   });
 
+  const validateForm = () => {
+    const errors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) errors.name = "Name is required";
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+    if (!formData.phone.trim()) {
+      errors.phone = "Phone number is required";
+    } else if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(formData.phone)) {
+      errors.phone = "Please enter a valid phone number";
+    }
+    if (!formData.message.trim()) errors.message = "Message is required";
+    
+    return errors;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const errors = validateForm();
+    setFieldErrors(errors);
+    
+    if (Object.keys(errors).length > 0) {
+      toast({
+        title: "Please correct the errors below",
+        description: "All required fields must be filled out correctly",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     contactMutation.mutate(formData);
   };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear field error when user starts typing
+    if (fieldErrors[field]) {
+      setFieldErrors(prev => ({ ...prev, [field]: "" }));
+    }
   };
 
   return (
@@ -152,38 +189,54 @@ export default function Contact() {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name" className={fieldErrors.name ? "text-red-600" : ""}>
+                          Name {fieldErrors.name && <span className="text-red-600">*</span>}
+                        </Label>
                         <Input
                           id="name"
                           required
                           value={formData.name}
                           onChange={(e) => handleInputChange("name", e.target.value)}
-                          className="mt-2"
+                          className={`mt-2 ${fieldErrors.name ? "border-red-500 focus:border-red-500" : ""}`}
                         />
+                        {fieldErrors.name && (
+                          <p className="text-red-600 text-sm mt-1">{fieldErrors.name}</p>
+                        )}
                       </div>
                       <div>
-                        <Label htmlFor="phone">Phone</Label>
+                        <Label htmlFor="phone" className={fieldErrors.phone ? "text-red-600" : ""}>
+                          Phone {fieldErrors.phone && <span className="text-red-600">*</span>}
+                        </Label>
                         <Input
                           id="phone"
                           type="tel"
                           required
                           value={formData.phone}
                           onChange={(e) => handleInputChange("phone", e.target.value)}
-                          className="mt-2"
+                          className={`mt-2 ${fieldErrors.phone ? "border-red-500 focus:border-red-500" : ""}`}
+                          placeholder="(302) 123-4567"
                         />
+                        {fieldErrors.phone && (
+                          <p className="text-red-600 text-sm mt-1">{fieldErrors.phone}</p>
+                        )}
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email" className={fieldErrors.email ? "text-red-600" : ""}>
+                        Email {fieldErrors.email && <span className="text-red-600">*</span>}
+                      </Label>
                       <Input
                         id="email"
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => handleInputChange("email", e.target.value)}
-                        className="mt-2"
+                        className={`mt-2 ${fieldErrors.email ? "border-red-500 focus:border-red-500" : ""}`}
                       />
+                      {fieldErrors.email && (
+                        <p className="text-red-600 text-sm mt-1">{fieldErrors.email}</p>
+                      )}
                     </div>
 
                     <div>
@@ -212,7 +265,9 @@ export default function Contact() {
                     </div>
 
                     <div>
-                      <Label htmlFor="message">Message</Label>
+                      <Label htmlFor="message" className={fieldErrors.message ? "text-red-600" : ""}>
+                        Message {fieldErrors.message && <span className="text-red-600">*</span>}
+                      </Label>
                       <Textarea
                         id="message"
                         rows={4}
@@ -220,8 +275,11 @@ export default function Contact() {
                         placeholder="Tell us about your lawn care needs..."
                         value={formData.message}
                         onChange={(e) => handleInputChange("message", e.target.value)}
-                        className="mt-2"
+                        className={`mt-2 ${fieldErrors.message ? "border-red-500 focus:border-red-500" : ""}`}
                       />
+                      {fieldErrors.message && (
+                        <p className="text-red-600 text-sm mt-1">{fieldErrors.message}</p>
+                      )}
                     </div>
 
                     <Button
